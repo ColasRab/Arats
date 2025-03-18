@@ -10,11 +10,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Brain, ArrowLeft } from "lucide-react"
-import { useAppContext } from "@/context/app-context"
 
 export default function RegisterPage() {
   const router = useRouter()
-  const { register } = useAppContext()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,23 +43,6 @@ export default function RegisterPage() {
       setError("Passwords do not match")
       setIsLoading(false)
       return
-    }
-
-    try {
-      // Use the register function from context
-      const success = await register({ name: formData.name, email: formData.email }, formData.password)
-
-      if (success) {
-        // Redirect to onboarding
-        router.push("/onboarding")
-      } else {
-        setError("Registration failed. Please try again.")
-      }
-    } catch (err) {
-      setError("An error occurred during registration")
-      console.error(err)
-    } finally {
-      setIsLoading(false)
     }
   }
 

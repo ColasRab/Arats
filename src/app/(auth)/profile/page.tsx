@@ -9,15 +9,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Brain, LineChart, MapPin, Moon, User, Weight, Calendar, Settings, LogOut, Menu, X, Save } from "lucide-react"
-import { useMobile } from "@/hooks/use-mobile"
-import { useToast } from "@/hooks/use-toast"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function ProfilePage() {
-  const isMobile = useMobile()
-  const [sidebarOpen, setSidebarOpen] = useState(!isMobile)
-  const { toast } = useToast()
+
+
 
   const [formData, setFormData] = useState({
     name: "John Doe",
@@ -27,9 +24,6 @@ export default function ProfilePage() {
     phone: "+1 (555) 123-4567",
   })
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -46,18 +40,11 @@ export default function ProfilePage() {
     // In a real app, you would send this data to your backend
     console.log("Profile data:", formData)
 
-    toast({
-      title: "Profile updated",
-      description: "Your profile information has been saved.",
-    })
   }
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSidebar}>
-          {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
         <div className="flex items-center gap-2">
           <Brain className="h-6 w-6 text-primary" />
           <span className="text-lg font-semibold">MindTrack</span>
@@ -78,7 +65,6 @@ export default function ProfilePage() {
         </div>
       </header>
       <div className="flex flex-1 flex-col md:grid md:grid-cols-[220px_1fr]">
-        <aside className={`${sidebarOpen ? "flex" : "hidden"} w-full flex-col border-r bg-muted/40 md:flex`}>
           <nav className="grid gap-2 p-4 text-sm font-medium">
             <Link href="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-muted">
               <LineChart className="h-5 w-5" />
@@ -108,7 +94,6 @@ export default function ProfilePage() {
               Profile
             </Link>
           </nav>
-        </aside>
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
           <div className="flex items-center">
             <h1 className="text-lg font-semibold md:text-2xl">Your Profile</h1>

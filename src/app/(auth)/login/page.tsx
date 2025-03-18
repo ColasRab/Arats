@@ -10,11 +10,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Brain, ArrowLeft } from "lucide-react"
-import { useAppContext } from "@/context/app-context"
 
 export default function LoginPage() {
   const router = useRouter()
-  const { login } = useAppContext()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,23 +35,6 @@ export default function LoginPage() {
       setError("All fields are required")
       setIsLoading(false)
       return
-    }
-
-    try {
-      // Use the login function from context
-      const success = await login(formData.email, formData.password)
-
-      if (success) {
-        // Redirect to dashboard on successful login
-        router.push("/dashboard")
-      } else {
-        setError("Invalid email or password")
-      }
-    } catch (err) {
-      setError("An error occurred during login")
-      console.error(err)
-    } finally {
-      setIsLoading(false)
     }
   }
 
