@@ -32,7 +32,7 @@ export default function CheckInPage() {
       localStorage.setItem("moodCheckIns", JSON.stringify(checkIns))
 
       // Show a random quote
-      router.push("moodtrack/dashboard")
+      router.push("./dashboard")
     }
   }
 
